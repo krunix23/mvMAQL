@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<body>
+  <database name="ses" tablename="macs" connstr="Server=MOKSHA,1433;Initial Catalog=gemini;User Id=ses;Password=***;"></database>
+  <camera type="mvBlueGEMINI" mac="00:0c:8d:81:00:00" step="1" category="A"/>
+  <camera type="BlfCam_Profinet" mac="00:19:31:20:40:00" step="5" category="B"/>
+  <camera type="BlfCam_TCP" mac="00:19:31:20:40:00" step="1" category="B"/>
+</body>

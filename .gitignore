@@ -1,1 +1,5 @@
 *.suo
+bin
+libmvMAQLHandling/obj
+libmvMAQLHelper/obj
+mvMAQLClient/obj
