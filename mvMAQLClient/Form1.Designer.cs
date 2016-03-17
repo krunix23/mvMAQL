@@ -67,6 +67,12 @@
             this.textBoxAssignSerialFreeMAC = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.buttonInsertLicense = new System.Windows.Forms.Button();
+            this.textBoxInsertLicense = new System.Windows.Forms.TextBox();
+            this.textBoxMACLicenseFile = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -78,6 +84,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -121,6 +128,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -457,6 +465,62 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.label11);
+            this.groupBox8.Controls.Add(this.label10);
+            this.groupBox8.Controls.Add(this.textBoxMACLicenseFile);
+            this.groupBox8.Controls.Add(this.textBoxInsertLicense);
+            this.groupBox8.Controls.Add(this.buttonInsertLicense);
+            this.groupBox8.Location = new System.Drawing.Point(7, 206);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(349, 100);
+            this.groupBox8.TabIndex = 2;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "License";
+            // 
+            // buttonInsertLicense
+            // 
+            this.buttonInsertLicense.Location = new System.Drawing.Point(252, 41);
+            this.buttonInsertLicense.Name = "buttonInsertLicense";
+            this.buttonInsertLicense.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsertLicense.TabIndex = 0;
+            this.buttonInsertLicense.Text = "Insert";
+            this.buttonInsertLicense.UseVisualStyleBackColor = true;
+            this.buttonInsertLicense.Click += new System.EventHandler(this.buttonInsertLicense_Click);
+            // 
+            // textBoxInsertLicense
+            // 
+            this.textBoxInsertLicense.Location = new System.Drawing.Point(100, 64);
+            this.textBoxInsertLicense.Name = "textBoxInsertLicense";
+            this.textBoxInsertLicense.Size = new System.Drawing.Size(136, 20);
+            this.textBoxInsertLicense.TabIndex = 1;
+            // 
+            // textBoxMACLicenseFile
+            // 
+            this.textBoxMACLicenseFile.Location = new System.Drawing.Point(100, 20);
+            this.textBoxMACLicenseFile.Name = "textBoxMACLicenseFile";
+            this.textBoxMACLicenseFile.Size = new System.Drawing.Size(136, 20);
+            this.textBoxMACLicenseFile.TabIndex = 2;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 20);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "MAC";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 64);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(60, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "License file";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,6 +553,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -534,6 +600,12 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.TextBox textBoxExcelInputFile;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.TextBox textBoxInsertLicense;
+        private System.Windows.Forms.Button buttonInsertLicense;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxMACLicenseFile;
     }
 }
 

@@ -103,13 +103,13 @@ namespace libmvMAQLHandling
                 SqlCommand sqlcmd = new SqlCommand(cmd, sqlcon_);
                 sqlcon_.Open();
                 sqlcmd.ExecuteNonQuery();
-                sqlcon_.Close();
                 result = true;
             }
             catch (SystemException ex)
             {
                 Trace.WriteLine(string.Format("{0}(): {1}", System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message), "ERROR");
             }
+            sqlcon_.Close();
             return result;
         }
 
@@ -278,6 +278,26 @@ namespace libmvMAQLHandling
             string sCmd = string.Format("SELECT {0} FROM [{1}] WHERE Serialnumber IS NULL AND {2} IS NOT NULL", colType, tablename_, colType);
 
             return ExecuteRead(colType, sCmd);
+        }
+
+        public void InsertLicenseFile(string colType, string sMac, string fileName)
+        {
+            string sCmd = string.Format("UPDATE [{0}] SET License=(SELECT * FROM OPENROWSET (BULK 'C:\\license.dat', SINGLE_BLOB) AS License) WHERE ({1}='{2}')", tablename_, colType, sMac);
+            //string cmd = string.Format("UPDATE [{0}] SET License = (SELECT * FROM OPENROWSET (BULK N'{1}', SINGLE_BLOB) AS Krunix) WHERE mvBlueGEMINI='{2}'", tablename_, fileName, sMac);
+            //string cmd = string.Format("INSERT INTO {0}(License) values('{1}',(SELECT * FROM OPENROWSET (BULK N'{2}', SINGLE_BLOB) AS Krunix))", tablename_, colType, fileName);
+
+            //ExecuteNonQuery(sCmd);
+            try
+            {
+                SqlCommand sqlcmd = new SqlCommand(sCmd, sqlcon_);
+                sqlcon_.Open();
+                sqlcmd.ExecuteNonQuery();
+                sqlcon_.Close();
+            }
+            catch (SystemException ex)
+            {
+                Trace.WriteLine(string.Format("{0}(): {1}", System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message), "ERROR");
+            }
         }
 
         public void InsertMAC(string colType, string mac)

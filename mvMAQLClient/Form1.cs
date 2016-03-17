@@ -42,6 +42,8 @@ namespace mvMAQL
                 comboBoxType.Items.Add(sTypes[i]);
             }
             comboBoxType.SelectedIndex = 0;
+            textBoxInsertLicense.Text = "C:\\license.dat";
+            textBoxMACLicenseFile.Text = "00:0c:8d:00:0c:f1";
         }
 
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,6 +142,11 @@ namespace mvMAQL
                     Trace.WriteLine(string.Format("Inserted {0} for {1}", lMACs[i], comboBoxType.Text));
                 }
             }
+        }
+
+        private void buttonInsertLicense_Click(object sender, EventArgs e)
+        {
+            sqldata_.InsertLicenseFile(comboBoxType.Text, textBoxMACLicenseFile.Text, textBoxInsertLicense.Text);
         }
 
         private void tabControl1_DrawItem_1(object sender, DrawItemEventArgs e)
