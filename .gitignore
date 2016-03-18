@@ -3,3 +3,4 @@ bin
 libmvMAQLHandling/obj
 libmvMAQLHelper/obj
 mvMAQLClient/obj
+license*.dat

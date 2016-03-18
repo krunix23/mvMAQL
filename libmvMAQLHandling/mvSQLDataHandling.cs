@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using libmvMAQLHandling;
 
 namespace libmvMAQLHandling
@@ -47,7 +48,7 @@ namespace libmvMAQLHandling
                 {
                     while (reader.Read())
                     {
-                        Trace.WriteLine(String.Format("Data already inserted: {0} : {1}: {2}", reader["Serialnumber"], reader["mvBlueGEMINI"], reader["BlfCam_Profinet"]), "ERROR");
+                        Trace.WriteLine(String.Format("Data already inserted: {0} : {1}: {2}", reader["Serialnumber"], reader["mvBlueGEMINI"], reader["BlfCam_Profinet"]));
                         result = true;
                     }
                 }
@@ -96,10 +97,6 @@ namespace libmvMAQLHandling
 
             try
             {
-                //SqlCommand sqlcmd = new SqlCommand("INSERT INTO macs(Id,Serialnumber) values(@kid,@kserial)", sqlcon_);
-                //sqlcmd.Parameters.AddWithValue("@kid", 23);
-                //sqlcmd.Parameters.AddWithValue("@kserial", textBox1.Text);
-
                 SqlCommand sqlcmd = new SqlCommand(cmd, sqlcon_);
                 sqlcon_.Open();
                 sqlcmd.ExecuteNonQuery();
@@ -198,7 +195,6 @@ namespace libmvMAQLHandling
 
             if (lResult.Count > 0)
             {
-                //result = libmvMAQLHelper.SpreadsheetHandling.MACStringToInt64(lResult[lResult.Count - 1]);
                 result = mvSQLDataHandling.MACStringToInt64(lResult[lResult.Count - 1]);
             }
 
@@ -280,24 +276,51 @@ namespace libmvMAQLHandling
             return ExecuteRead(colType, sCmd);
         }
 
-        public void InsertLicenseFile(string colType, string sMac, string fileName)
+        public void InsertLicenseFile(string colType, string sMAC, string fileName)
         {
-            string sCmd = string.Format("UPDATE [{0}] SET License=(SELECT * FROM OPENROWSET (BULK 'C:\\license.dat', SINGLE_BLOB) AS License) WHERE ({1}='{2}')", tablename_, colType, sMac);
-            //string cmd = string.Format("UPDATE [{0}] SET License = (SELECT * FROM OPENROWSET (BULK N'{1}', SINGLE_BLOB) AS Krunix) WHERE mvBlueGEMINI='{2}'", tablename_, fileName, sMac);
-            //string cmd = string.Format("INSERT INTO {0}(License) values('{1}',(SELECT * FROM OPENROWSET (BULK N'{2}', SINGLE_BLOB) AS Krunix))", tablename_, colType, fileName);
+            if (!CheckExistingData(sMAC))
+            {
+                Trace.WriteLine(string.Format("The data \"{0}\" couldn't be found in the table", sMAC), "ERROR");
+                return;
+            }
+            byte[] fileBuf = File.ReadAllBytes(fileName);
+            string license64 = Convert.ToBase64String(fileBuf);
+            string sCmd = string.Format("UPDATE [{0}] SET License=CONVERT(VARBINARY(MAX),'{1}') WHERE {2}='{3}'", tablename_, license64, colType, sMAC);
 
-            //ExecuteNonQuery(sCmd);
+            ExecuteNonQuery(sCmd);
+            RetrieveLicenseFile(colType, sMAC);
+        }
+
+        public byte[] RetrieveLicenseFile(string colType, string sMAC)
+        {
+            string sCmd = string.Format("SELECT License FROM [{0}] WHERE {1}='{2}'", tablename_, colType, sMAC);
+
             try
             {
                 SqlCommand sqlcmd = new SqlCommand(sCmd, sqlcon_);
                 sqlcon_.Open();
-                sqlcmd.ExecuteNonQuery();
-                sqlcon_.Close();
+                SqlDataReader reader = sqlcmd.ExecuteReader(System.Data.CommandBehavior.SequentialAccess);
+                while (reader.Read())
+                {
+                    int maxBufferSize = 1024;
+                    byte[] outByte = new byte[maxBufferSize];
+                    long startIndex = 0;
+                    long retval;
+                    retval = reader.GetBytes(0, startIndex, outByte, 0, maxBufferSize);
+                    string result = System.Text.Encoding.UTF8.GetString(outByte, 0, (int)retval);
+                    byte[] license = Convert.FromBase64String(result);
+                    string outFile = Directory.GetCurrentDirectory() + "\\license_out.dat";
+                    File.WriteAllBytes(outFile, license);
+                    Trace.WriteLine(string.Format("Saving license as {0}", outFile));
+                }
             }
             catch (SystemException ex)
             {
                 Trace.WriteLine(string.Format("{0}(): {1}", System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message), "ERROR");
             }
+            sqlcon_.Close();
+
+            return null;
         }
 
         public void InsertMAC(string colType, string mac)

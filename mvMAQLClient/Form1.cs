@@ -42,7 +42,7 @@ namespace mvMAQL
                 comboBoxType.Items.Add(sTypes[i]);
             }
             comboBoxType.SelectedIndex = 0;
-            textBoxInsertLicense.Text = "C:\\license.dat";
+            textBoxInsertLicense.Text = "C:\\Users\\Krunix\\mvMAQL\\mvMAQLClient\\license_000c8d000cf1.dat";
             textBoxMACLicenseFile.Text = "00:0c:8d:00:0c:f1";
         }
 
