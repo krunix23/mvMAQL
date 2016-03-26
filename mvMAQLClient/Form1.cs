@@ -19,7 +19,8 @@ namespace mvMAQL
         private RectangleF tabTextArea;
 
         private Logger logger_;
-        private mvSQLDataHandling sqldata_;
+        //private mvSQLDataHandling sqldata_;
+        private mvOSQLDataHandling sqldata_;
         private ConfigHandling cfg_;
         private SpreadsheetHandling exc_;
 
@@ -34,7 +35,7 @@ namespace mvMAQL
             exc_ = new SpreadsheetHandling(cfg_);
 
 
-            sqldata_ = new mvSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
+            sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
 
             string[] sTypes = cfg_.GetAllTypes();
             for (int i = 0; i < sTypes.Length; i++)
@@ -42,7 +43,7 @@ namespace mvMAQL
                 comboBoxType.Items.Add(sTypes[i]);
             }
             comboBoxType.SelectedIndex = 0;
-            textBoxInsertLicense.Text = "C:\\Users\\Krunix\\mvMAQL\\mvMAQLClient\\license_000c8d000cf1.dat";
+            textBoxInsertLicense.Text = "C:\\Users\\krunix\\halcon\\gemini\\old\\license_000c8d000cf1.dat";
             textBoxMACLicenseFile.Text = "00:0c:8d:00:0c:f1";
         }
 
