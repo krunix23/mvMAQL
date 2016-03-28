@@ -62,6 +62,24 @@ namespace libmvMAQLHelper
             return sResult;
         }
 
+        public string DatabaseProvider()
+        {
+            string sResult = string.Empty;
+            try
+            {
+                XmlNodeList elemList = cfgdoc_.GetElementsByTagName("database");
+                if (elemList.Count > 0)
+                {
+                    sResult = elemList[0].Attributes["provider"].Value;
+                }
+            }
+            catch (SystemException ex)
+            {
+                Trace.WriteLine(string.Format("{0}(): {1}", System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message), "ERROR");
+            }
+            return sResult;
+        }
+
         public string[] GetAllTypes()
         {
             try

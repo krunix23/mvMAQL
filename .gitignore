@@ -4,3 +4,5 @@ libmvMAQLHandling/obj
 libmvMAQLHelper/obj
 mvMAQLClient/obj
 license*.dat
+libmvMAQLHandling/app.config
+mvMAQLClient/mvMAQLClient.csproj.user

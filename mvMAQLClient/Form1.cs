@@ -34,8 +34,13 @@ namespace mvMAQL
             cfg_ = new ConfigHandling();
             exc_ = new SpreadsheetHandling(cfg_);
 
-            //sqldata_ = new mvMSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
-            sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
+            if (cfg_.DatabaseProvider() != string.Empty)
+            {
+                if (cfg_.DatabaseProvider() == "microsoft")
+                    sqldata_ = new mvMSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
+                else if (cfg_.DatabaseProvider() == "oracle")
+                    sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
+            }
 
             string[] sTypes = cfg_.GetAllTypes();
             for (int i = 0; i < sTypes.Length; i++)
