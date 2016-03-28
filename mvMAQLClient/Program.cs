@@ -20,7 +20,15 @@ namespace mvMAQL
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            try
+            {
+                Form form_ = new Form1();
+                Application.Run(form_);
+            }
+            catch(SystemException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }            
             //Application.Run();
             //Console.WriteLine("main(): WP");
         }

@@ -40,6 +40,8 @@ namespace mvMAQL
                     sqldata_ = new mvMSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
                 else if (cfg_.DatabaseProvider() == "oracle")
                     sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
+                else
+                    throw new SystemException("No database provider found in config.xml");
             }
 
             string[] sTypes = cfg_.GetAllTypes();
