@@ -40,7 +40,7 @@ namespace libmvMAQLHelper
                 int iStepWidth = cfgdoc_.GetStepwidth(type);
                 SLDocument slDoc = new SLDocument();
 
-                if (iStepWidth < 0)
+                if (iStepWidth < 1)
                 {
                     Trace.WriteLine("The stepwidth for MAC creation is invalid", "ERROR");
                 }

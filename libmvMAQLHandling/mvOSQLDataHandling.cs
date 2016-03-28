@@ -282,6 +282,32 @@ namespace libmvMAQLHandling
             RetrieveLicenseFile(colType, sMAC);
         }
 
+        public override void InsertMAC(string colType, string mac)
+        {
+            if (CheckExistingData(mac))
+                return;
+
+            ExecuteNonQuery(InsertMACCmd(colType, mac));
+        }
+
+        private string InsertMACCmd(string colType, string mac)
+        {
+            return string.Format("INSERT INTO {0}({1}) values('{2}')", tablename_, colType, mac);
+        }
+
+        public override void InsertSerial(string serial)
+        {
+            if (CheckExistingData(serial))
+                return;
+
+            ExecuteNonQuery(InsertSerialCmd(serial));
+        }
+
+        private string InsertSerialCmd(string serial)
+        {
+            return string.Format("INSERT INTO {0}(Serialnumber) values('{1}')", tablename_, serial);
+        }
+
         public override byte[] RetrieveLicenseFile(string colType, string sMAC)
         {
             string sCmd = string.Format("SELECT License FROM {0} WHERE {1}='{2}'", tablename_, colType, sMAC);
@@ -312,64 +338,6 @@ namespace libmvMAQLHandling
             sqlcon_.Close();
 
             return null;
-        }
-
-        public override void InsertMAC(string colType, string mac)
-        {
-            if (CheckExistingData(mac))
-                return;
-
-            ExecuteNonQuery(InsertMACCmd(colType, mac));
-        }
-
-        private string InsertMACCmd(string colType, string mac)
-        {
-            return string.Format("INSERT INTO {0}({1}) values('{2}')", tablename_, colType, mac);
-        }
-
-        public override void InsertSerial(string serial)
-        {
-            if (CheckExistingData(serial))
-                return;
-
-            ExecuteNonQuery(InsertSerialCmd(serial));
-        }
-
-        private string InsertSerialCmd(string serial)
-        {
-            return string.Format("INSERT INTO {0}(Serialnumber) values('{1}')", tablename_, serial);
-        }
-
-        public static string MACInt64ToString(Int64 imac)
-        {
-            if (imac != 0)
-            {
-                string sMac = string.Format("{0:X2}:{1:X2}:{2:X2}:{3:X2}:{4:X2}:{5:X2}",
-                     ((imac >> 40) & 0xff),
-                     ((imac >> 32) & 0xff),
-                     ((imac >> 24) & 0xff),
-                     ((imac >> 16) & 0xff),
-                     ((imac >> 8) & 0xff),
-                     ((imac >> 0) & 0xff));
-                return sMac;
-            }
-            return string.Empty;
-        }
-
-        public static Int64 MACStringToInt64(string smac)
-        {
-            Int64 iResult = 0;
-
-            if (smac != string.Empty)
-            {
-                try
-                {
-                    string value = smac.Replace(":", "");
-                    iResult = Convert.ToInt64(value, 16);
-                }
-                catch { }
-            }
-            return iResult;
         }
 
         public override void UpdateMACWithSerial(string colType, string mac, string serial)

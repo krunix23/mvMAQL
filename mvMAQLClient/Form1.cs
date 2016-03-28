@@ -60,7 +60,7 @@ namespace mvMAQL
             if(lastMAC > 0)
             {
                 Int64 nxtMAC = lastMAC + cfg_.GetStepwidth(sType);
-                textBoxFirstMAC.Text = SpreadsheetHandling.MACInt64ToString(nxtMAC);
+                textBoxFirstMAC.Text = mvSQLDataHandlingBase.MACInt64ToString(nxtMAC);
             }
         }
 
