@@ -19,8 +19,8 @@ namespace mvMAQL
         private RectangleF tabTextArea;
 
         private Logger logger_;
-        //private mvSQLDataHandling sqldata_;
-        private mvOSQLDataHandling sqldata_;
+        //private mvMSQLDataHandling sqldata_;
+        private mvSQLDataHandlingBase sqldata_;
         private ConfigHandling cfg_;
         private SpreadsheetHandling exc_;
 
@@ -34,7 +34,7 @@ namespace mvMAQL
             cfg_ = new ConfigHandling();
             exc_ = new SpreadsheetHandling(cfg_);
 
-
+            //sqldata_ = new mvMSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
             sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
 
             string[] sTypes = cfg_.GetAllTypes();

@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace libmvMAQLHandling
 {
-    public class mvOSQLDataHandling
+    public class mvOSQLDataHandling : mvSQLDataHandlingBase
     {
         private string tablename_;
         private string connstr_;
@@ -152,7 +152,7 @@ namespace libmvMAQLHandling
             return lResult;
         }
 
-        public void FindData(string data, string column)
+        public override void FindData(string data, string column)
         {
             string sCmd = string.Format("SELECT * From {0} WHERE {1}='{2}'", tablename_, column, data);
             List<string[]> lResult = ExecuteLineReads(sCmd);
@@ -177,7 +177,7 @@ namespace libmvMAQLHandling
             }
         }
 
-        public Int64 FindHighestMAC(string colType)
+        public override Int64 FindHighestMAC(string colType)
         {
             Int64 result = 0;
 
@@ -186,13 +186,13 @@ namespace libmvMAQLHandling
 
             if (lResult.Count > 0)
             {
-                result = mvSQLDataHandling.MACStringToInt64(lResult[lResult.Count - 1]);
+                result = mvMSQLDataHandling.MACStringToInt64(lResult[lResult.Count - 1]);
             }
 
             return result;
         }
 
-        public string FindMAC(string colType, string mac)
+        public override string FindMAC(string colType, string mac)
         {
             string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac);
             string sResult = ExecuteRead(colType, sCmd);
@@ -208,7 +208,7 @@ namespace libmvMAQLHandling
             return sResult;
         }
 
-        public void FindMACs(string colType, string mac)
+        public override void FindMACs(string colType, string mac)
         {
             string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac);
             List<string> lResult = ExecuteReads(colType, sCmd);
@@ -226,7 +226,7 @@ namespace libmvMAQLHandling
             }
         }
 
-        public string FindSerial(string serial)
+        public override string FindSerial(string serial)
         {
             string sCmd = string.Format("SELECT Serialnumber From {0} WHERE Serialnumber='{1}'", tablename_, serial);
             string sResult = ExecuteRead("Serialnumber", sCmd);
@@ -242,7 +242,7 @@ namespace libmvMAQLHandling
             return sResult;
         }
 
-        public void FindSerials(string serial)
+        public override void FindSerials(string serial)
         {
             string sCmd = string.Format("SELECT Serialnumber From {0} WHERE Serialnumber='{1}'", tablename_, serial);
             List<string> lResult = ExecuteReads("Serialnumber", sCmd);
@@ -260,14 +260,14 @@ namespace libmvMAQLHandling
             }
         }
 
-        public string FindUnusedMAC(string colType)
+        public override string FindUnusedMAC(string colType)
         {
             string sCmd = string.Format("SELECT {0} FROM {1} WHERE Serialnumber IS NULL AND {2} IS NOT NULL", colType, tablename_, colType);
 
             return ExecuteRead(colType, sCmd);
         }
 
-        public void InsertLicenseFile(string colType, string sMAC, string fileName)
+        public override void InsertLicenseFile(string colType, string sMAC, string fileName)
         {
             if (!CheckExistingData(sMAC))
             {
@@ -282,7 +282,7 @@ namespace libmvMAQLHandling
             RetrieveLicenseFile(colType, sMAC);
         }
 
-        public byte[] RetrieveLicenseFile(string colType, string sMAC)
+        public override byte[] RetrieveLicenseFile(string colType, string sMAC)
         {
             string sCmd = string.Format("SELECT License FROM {0} WHERE {1}='{2}'", tablename_, colType, sMAC);
 
@@ -314,7 +314,7 @@ namespace libmvMAQLHandling
             return null;
         }
 
-        public void InsertMAC(string colType, string mac)
+        public override void InsertMAC(string colType, string mac)
         {
             if (CheckExistingData(mac))
                 return;
@@ -327,7 +327,7 @@ namespace libmvMAQLHandling
             return string.Format("INSERT INTO {0}({1}) values('{2}')", tablename_, colType, mac);
         }
 
-        public void InsertSerial(string serial)
+        public override void InsertSerial(string serial)
         {
             if (CheckExistingData(serial))
                 return;
@@ -372,7 +372,7 @@ namespace libmvMAQLHandling
             return iResult;
         }
 
-        public void UpdateMACWithSerial(string colType, string mac, string serial)
+        public override void UpdateMACWithSerial(string colType, string mac, string serial)
         {
             if (CheckExistingData(serial))
             {
