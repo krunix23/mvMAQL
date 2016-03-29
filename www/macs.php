@@ -1,7 +1,7 @@
 <?php
 $servername = "192.168.0.22";
-$username = "ses";
-$password = "***";
+$username = "matrix";
+$password = "matrix";
 $dbname = "ses";
 
 // Create connection

@@ -46,7 +46,7 @@ namespace libmvMAQLHandling
                 MySqlDataReader reader = sqlcmd.ExecuteReader();
                 while(reader.Read())
                 {
-                    Trace.WriteLine(String.Format("Data already inserted: {0} : {1}: {2}", reader["Serialnumber"], reader["mvBlueGEMINI"], reader["BlfCam_Profinet"]));
+                    Trace.WriteLine(String.Format("Found data entry: {0} : {1} : {2} : {3}", reader["Serialnumber"], reader["mvBlueGEMINI"], reader["BlfCam_Profinet"], reader["BlfCam_TCP"]));
                     result = true;
                 }
                 sqlcon_.Close();
