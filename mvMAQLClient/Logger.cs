@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
 
-namespace mvMAQL
+namespace mv.MAQL
 {
 
     /// <summary>

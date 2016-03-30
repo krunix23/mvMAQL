@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-using libmvMAQLHandling;
-using libmvMAQLHelper;
+using mv.MAQL.Data.Handling;
+using mv.MAQL.Helper;
 
-namespace mvMAQL
+namespace mv.MAQL
 {
     public partial class Form1 : Form
     {

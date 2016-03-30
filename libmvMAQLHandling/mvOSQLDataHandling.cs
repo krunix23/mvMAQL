@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using MySql.Data.MySqlClient;
+using mv.MAQL.Helper;
 
-namespace libmvMAQLHandling
+namespace mv.MAQL.Data.Handling
 {
     public class mvOSQLDataHandling : mvSQLDataHandlingBase
     {
@@ -36,8 +37,26 @@ namespace libmvMAQLHandling
         /// <returns>Returns TRUE if data already exists.</returns>
         private bool CheckExistingData(string data)
         {
+            ConfigHandling cfg_ = new ConfigHandling();
+            string[] sTypes = cfg_.GetAllTypes();
+            string sCmdSub = string.Empty;
             bool result = false;
-            string sCmd = string.Format("SELECT * FROM {0} WHERE Serialnumber='{1}' OR mvBlueGEMINI='{2}' OR BlfCam_Profinet='{3}' OR BlfCam_TCP='{4}'", tablename_, data, data, data, data);
+
+            if(data.Contains(" "))
+            {
+                Trace.WriteLine(string.Format("Whitespace are not allowed ({0})", data), "ERROR");
+                return true;
+            }
+
+            if(sTypes.Length > 0)
+            {
+                for(int i = 0; i < sTypes.Length; i++)
+                {
+                    sCmdSub += string.Format(" OR {0}='{1}'", sTypes[i], data);
+                }
+            }
+
+            string sCmd = string.Format("SELECT * FROM {0} WHERE Serialnumber='{1}'{2}", tablename_, data, sCmdSub);
 
             try
             {
@@ -46,7 +65,16 @@ namespace libmvMAQLHandling
                 MySqlDataReader reader = sqlcmd.ExecuteReader();
                 while(reader.Read())
                 {
-                    Trace.WriteLine(String.Format("Found data entry: {0} : {1} : {2} : {3}", reader["Serialnumber"], reader["mvBlueGEMINI"], reader["BlfCam_Profinet"], reader["BlfCam_TCP"]));
+                    string tmp = null;
+                    if(reader.FieldCount > 0)
+                    {
+                        for(int i = 0; i < reader.FieldCount; i++)
+                        {
+                            if(reader.GetDataTypeName(i).Equals("VARCHAR"))
+                                tmp += reader[i].ToString() + " : ";
+                        }
+                    }
+                    Trace.WriteLine(String.Format("Found in table: {0}", tmp));
                     result = true;
                 }
                 sqlcon_.Close();
@@ -73,7 +101,8 @@ namespace libmvMAQLHandling
                     string[] sLine = new string[reader.FieldCount];
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
-                        sLine[i] = reader[i].ToString();
+                        if(reader.GetDataTypeName(i).Equals("VARCHAR"))
+                            sLine[i] = reader[i].ToString();
                     }
                     lResult.Add(sLine);
                 }
@@ -199,7 +228,7 @@ namespace libmvMAQLHandling
 
             if (sResult != string.Empty)
             {
-                Trace.WriteLine(string.Format("Found {0} in table", sResult));
+                Trace.WriteLine(string.Format("Found in table: {0}", sResult));
             }
             else
             {
@@ -217,7 +246,7 @@ namespace libmvMAQLHandling
             {
                 for (int i = 0; i < lResult.Count; i++)
                 {
-                    Trace.WriteLine(string.Format("Found {0} in table", lResult[i]));
+                    Trace.WriteLine(string.Format("Found in table: {0}", lResult[i]));
                 }
             }
             else
@@ -233,7 +262,7 @@ namespace libmvMAQLHandling
 
             if (sResult != string.Empty)
             {
-                Trace.WriteLine(string.Format("Found {0} in table", sResult));
+                Trace.WriteLine(string.Format("Found in table: {0}", sResult));
             }
             else
             {
@@ -251,7 +280,7 @@ namespace libmvMAQLHandling
             {
                 for (int i = 0; i < lResult.Count; i++)
                 {
-                    Trace.WriteLine(string.Format("Found {0} in table", lResult[i]));
+                    Trace.WriteLine(string.Format("Found in table: {0}", lResult[i]));
                 }
             }
             else

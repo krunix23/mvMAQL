@@ -1,4 +1,4 @@
-﻿namespace mvMAQL
+﻿namespace mv.MAQL
 {
     partial class Form1
     {

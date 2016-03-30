@@ -8,7 +8,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using SpreadsheetLight;
 using System.Diagnostics;
 
-namespace libmvMAQLHelper
+namespace mv.MAQL.Helper
 {
     public class SpreadsheetHandling
     {
@@ -29,7 +29,7 @@ namespace libmvMAQLHelper
 
         public void GenerateSpreadsheet(string type, string mac1st, decimal nummacs)
         {
-            if (mac1st == string.Empty || Decimal.ToInt32(nummacs) == 0)
+            if (mac1st.Contains(" ") ||  mac1st == string.Empty || Decimal.ToInt32(nummacs) == 0)
             {
                 return;
             }
