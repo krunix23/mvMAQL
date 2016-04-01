@@ -316,7 +316,7 @@ namespace mv.MAQL.Data.Handling
             string sCmd = string.Format("UPDATE {0} SET License=CONVERT('{1}',BINARY) WHERE {2}='{3}'", tablename_, license64, colType, sMAC);
 
             ExecuteNonQuery(sCmd);
-            RetrieveLicenseFile(colType, sMAC);
+            //RetrieveLicenseFile(colType, sMAC);
         }
 
         public override void InsertMAC(string colType, string mac)
@@ -366,6 +366,7 @@ namespace mv.MAQL.Data.Handling
 
                 result = sMAC;
                 InsertMAC(colType, sMAC);
+                InsertLicenseFile(colType, sMAC, sFilePaths[i]);
             }
             return result;
         }

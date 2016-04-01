@@ -23,7 +23,7 @@ namespace mv.MAQL.Helper
             {
                 Trace.WriteLine(string.Format("{0}(): {1}", System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message), "ERROR");
             }
-            Trace.WriteLine("Created ConfigHandler");
+            //Trace.WriteLine("Created ConfigHandler");
         }
 
         public string ConnectionString()
@@ -91,7 +91,7 @@ namespace mv.MAQL.Helper
                 {
                     string attrType = elemList[i].Attributes["type"].Value;
                     string attrMac = elemList[i].Attributes["mac"].Value;
-                    Trace.WriteLine(string.Format("Definition found for: {0} - {1}", attrType, attrMac));
+                    //Trace.WriteLine(string.Format("Definition found for: {0} - {1}", attrType, attrMac));
                     sResults[i] = attrType;
                 }
                 return sResults;
