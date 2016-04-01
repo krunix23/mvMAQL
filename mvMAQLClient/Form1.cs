@@ -157,6 +157,46 @@ namespace mv.MAQL
             sqldata_.InsertLicenseFile(comboBoxType.Text, textBoxMACLicenseFile.Text, textBoxInsertLicense.Text);
         }
 
+        private string checkLicenseDir(string folderName)
+        {
+            string result = string.Empty;
+            Char delimiter =  '\\';
+
+            if (string.IsNullOrEmpty(folderName))
+                return result;
+
+            string[] sDirs = folderName.Split(delimiter);
+
+            string[] types = cfg_.GetAllTypes();
+            for(int i = 0; i < types.Length; i++)
+            {
+                if(types[i] == sDirs[sDirs.Length-1])
+                {
+                    result = types[i];
+                    break;
+                }
+            }
+            return result;
+        }
+
+        private void buttonOpenDir_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(checkLicenseDir(folderBrowserDialog1.SelectedPath)))
+            {
+                Trace.WriteLine(string.Format("{0} as license dir selected", folderBrowserDialog1.SelectedPath), "INFO");
+            }
+        }
+
+        private void buttonLoadDir_Click(object sender, EventArgs e)
+        {
+            string sType = checkLicenseDir(folderBrowserDialog1.SelectedPath);
+            if (!string.IsNullOrEmpty(sType))
+            {
+                sqldata_.LoadLicensesFromFolder(sType, folderBrowserDialog1.SelectedPath);
+            }
+        }
+
         private void tabControl1_DrawItem_1(object sender, DrawItemEventArgs e)
         {
             //{

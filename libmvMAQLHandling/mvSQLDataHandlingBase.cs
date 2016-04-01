@@ -18,6 +18,7 @@ namespace mv.MAQL.Data.Handling
         public abstract void InsertLicenseFile(string colType, string sMAC, string fileName);
         public abstract void InsertMAC(string colType, string mac);
         public abstract void InsertSerial(string serial);
+        public abstract string LoadLicensesFromFolder(string colType, string sFolder);
         public abstract byte[] RetrieveLicenseFile(string colType, string sMAC);
         public abstract void UpdateMACWithSerial(string colType, string mac, string serial);
 

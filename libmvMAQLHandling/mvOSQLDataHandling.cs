@@ -181,6 +181,14 @@ namespace mv.MAQL.Data.Handling
             return lResult;
         }
 
+        private string MACFromLicenseFileName( string licenseFile )
+        {
+            string result = string.Empty;
+            string sMACtmp = licenseFile.Substring(8, 12);
+            Int64 iMAC = Convert.ToInt64(sMACtmp, 16);
+            return MACInt64ToString(iMAC);
+        }
+
         public override void FindData(string data, string column)
         {
             string sCmd = string.Format("SELECT * From {0} WHERE {1}='{2}'", tablename_, column, data);
@@ -335,6 +343,31 @@ namespace mv.MAQL.Data.Handling
         private string InsertSerialCmd(string serial)
         {
             return string.Format("INSERT INTO {0}(Serialnumber) values('{1}')", tablename_, serial);
+        }
+
+        public override string LoadLicensesFromFolder(string colType, string sFolder)
+        {
+            string result = string.Empty;
+            Char delimiter =  '\\';
+
+            if (string.IsNullOrEmpty(sFolder))
+                return result;
+
+            string[] sFilePaths = Directory.GetFiles(sFolder, "*.dat");
+
+            for(int i = 0; i < sFilePaths.Length; i++)
+            {
+                if (string.IsNullOrEmpty(sFilePaths[i]))
+                    continue;
+
+                string[] sLicenseFile = sFilePaths[i].Split(delimiter);
+
+                string sMAC = MACFromLicenseFileName(sLicenseFile[sLicenseFile.Length - 1]);
+
+                result = sMAC;
+                InsertMAC(colType, sMAC);
+            }
+            return result;
         }
 
         public override byte[] RetrieveLicenseFile(string colType, string sMAC)

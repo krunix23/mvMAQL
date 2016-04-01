@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mvOSQLDataHandling.cs" />
     <Compile Include="mvMSQLDataHandling.cs" />
+    <Compile Include="mvOSQLDataHandling.cs" />
     <Compile Include="mvSQLDataHandlingBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

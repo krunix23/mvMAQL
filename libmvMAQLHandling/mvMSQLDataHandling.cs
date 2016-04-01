@@ -316,6 +316,11 @@ namespace mv.MAQL.Data.Handling
             return string.Format("INSERT INTO {0}(Serialnumber) values('{1}')", tablename_, serial);
         }
 
+        public override string LoadLicensesFromFolder(string colType, string sFolder)
+        {
+            return string.Empty;
+        }
+
         public override byte[] RetrieveLicenseFile(string colType, string sMAC)
         {
             string sCmd = string.Format("SELECT License FROM [{0}] WHERE {1}='{2}'", tablename_, colType, sMAC);
