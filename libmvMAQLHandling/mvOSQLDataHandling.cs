@@ -306,6 +306,12 @@ namespace mv.MAQL.Data.Handling
 
         public override void InsertLicenseFile(string colType, string sMAC, string fileName)
         {
+            if(string.IsNullOrEmpty(fileName))
+            {
+                Trace.WriteLine(string.Format("The license file could not be located."), "ERROR");
+                return;
+            }
+
             if (!CheckExistingData(sMAC))
             {
                 Trace.WriteLine(string.Format("The data \"{0}\" couldn't be found in the table", sMAC), "ERROR");
