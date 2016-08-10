@@ -1,9 +1,11 @@
 *.suo
 bin
 libmvMAQLHandling/obj
+libmvMAQLHandling/libmvMAQLHandling.csproj.user
 libmvMAQLHelper/obj
 mvMAQLClient/obj
 mvMAQLClient-no-gui/obj
 license*.dat
 mvMAQLClient/mvMAQLClient.csproj.user
 mvMAQLClient/config.xml
+mvMAQLClient-no-gui/config.xml
