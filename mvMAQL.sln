@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libmvMAQLHandling", "libmvM
 		{385791B1-39B6-46E4-BCA4-78FDBFCD3AA1} = {385791B1-39B6-46E4-BCA4-78FDBFCD3AA1}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvMAQLClient-no-gui", "mvMAQLClient-no-gui\mvMAQLClient-no-gui.csproj", "{9D69283D-8EB5-4BE8-8B32-077EA9445B19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{75E968CC-37CC-43D5-8BC2-42D59A06DC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75E968CC-37CC-43D5-8BC2-42D59A06DC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75E968CC-37CC-43D5-8BC2-42D59A06DC5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D69283D-8EB5-4BE8-8B32-077EA9445B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D69283D-8EB5-4BE8-8B32-077EA9445B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D69283D-8EB5-4BE8-8B32-077EA9445B19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D69283D-8EB5-4BE8-8B32-077EA9445B19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,6 +3,7 @@ bin
 libmvMAQLHandling/obj
 libmvMAQLHelper/obj
 mvMAQLClient/obj
+mvMAQLClient-no-gui/obj
 license*.dat
 mvMAQLClient/mvMAQLClient.csproj.user
 mvMAQLClient/config.xml
