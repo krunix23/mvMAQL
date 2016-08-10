@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Diagnostics;
 
-namespace mv.MAQL.Helper
+namespace mv.MAQL
 {
 public class ConfigHandling
 {

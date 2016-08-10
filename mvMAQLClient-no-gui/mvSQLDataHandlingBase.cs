@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mv.MAQL.Data.Handling
+namespace mv.MAQL
 {
 public abstract class mvSQLDataHandlingBase
 {

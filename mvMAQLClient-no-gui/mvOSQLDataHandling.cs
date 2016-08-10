@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using MySql.Data.MySqlClient;
-using mv.MAQL.Helper;
 
-namespace mv.MAQL.Data.Handling
+namespace mv.MAQL
 {
 public class mvOSQLDataHandling : mvSQLDataHandlingBase
 {
