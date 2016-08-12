@@ -50,13 +50,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="libmvMAQLHandling, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Debug\libmvMAQLHandling.dll</HintPath>
+      <HintPath>..\packages\DocumentFormat.OpenXmlSDK.2.0\lib\Net35\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="libmvMAQLHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Debug\libmvMAQLHelper.dll</HintPath>
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SpreadsheetLight, Version=3.4.4.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SpreadsheetLight.3.4.4\lib\SpreadsheetLight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,8 +71,24 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\common\ConfigHandling.cs">
+      <Link>ConfigHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\common\mvMSQLDataHandling.cs">
+      <Link>mvMSQLDataHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\common\mvOSQLDataHandling.cs">
+      <Link>mvOSQLDataHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\common\mvSQLDataHandlingBase.cs">
+      <Link>mvSQLDataHandlingBase.cs</Link>
+    </Compile>
+    <Compile Include="..\common\SpreadsheetHandling.cs">
+      <Link>SpreadsheetHandling.cs</Link>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

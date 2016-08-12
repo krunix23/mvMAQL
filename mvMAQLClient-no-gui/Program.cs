@@ -7,28 +7,28 @@ using System.Diagnostics;
 
 namespace mv.MAQL
 {
-partial class Program
-{
-    private static Logger logger_;
-    private static ConfigHandling cfg_;
-    private static mvSQLDataHandlingBase sqldata_;
-
-    static int Main(string[] args)
+    partial class Program
     {
-        Console.WriteLine(string.Format("mvMAQLClient-no-gui"));
-        logger_ = new Logger("mvMAQLClient.log", "mvMAQLClient");
-        Trace.Listeners.Add(logger_);
+        private static Logger logger_;
+        private static ConfigHandling cfg_;
+        private static mvSQLDataHandlingBase sqldata_;
 
-        cfg_ = new ConfigHandling ();
-        sqldata_ = new mvOSQLDataHandling (cfg_.DatabaseName (), cfg_.ConnectionString ());
+        static int Main(string[] args)
+        {
+            Console.WriteLine(string.Format("mvMAQLClient-no-gui"));
+            logger_ = new Logger("mvMAQLClient.log", "mvMAQLClient");
+            Trace.Listeners.Add(logger_);
 
-        sqldata_.FindData ("MS000241", "Serialnumber");
-        DummyFunction();
+            cfg_ = new ConfigHandling();
+            sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
 
-        Console.WriteLine ("Press ENTER ...");
-        Console.ReadLine();
+            sqldata_.FindData("MS000241", "Serialnumber");
+            DummyFunction();
 
-        return 0;
+            Console.WriteLine("Press ENTER ...");
+            Console.ReadLine();
+
+            return 0;
+        }
     }
-}
 }

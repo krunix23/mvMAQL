@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D69283D-8EB5-4BE8-8B32-077EA9445B19}</ProjectGuid>
+    <ProjectGuid>{487A9CAB-3DD3-4946-893A-1FADD05483A8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>mvMAQLClient_no_gui</RootNamespace>
@@ -32,9 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,20 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigHandling.cs" />
+    <Compile Include="..\common\ConfigHandling.cs">
+      <Link>ConfigHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\common\mvOSQLDataHandling.cs">
+      <Link>mvOSQLDataHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\common\mvSQLDataHandlingBase.cs">
+      <Link>mvSQLDataHandlingBase.cs</Link>
+    </Compile>
     <Compile Include="Logger.cs" />
-    <Compile Include="mvOSQLDataHandling.cs" />
-    <Compile Include="mvSQLDataHandlingBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Program2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.xml" />
+    <Content Include="config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
