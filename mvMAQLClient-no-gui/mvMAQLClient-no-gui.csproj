@@ -55,7 +55,7 @@
     </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Program2.cs" />
+    <Compile Include="MAQLWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
