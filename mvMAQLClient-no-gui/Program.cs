@@ -24,12 +24,12 @@ namespace mv.MAQL
 
             logger_ = new Logger("mvMAQLClient.log", "mvMAQLClient");
             Trace.Listeners.Add(logger_);
-            MAQLWorker mql = new MAQLWorker(logger_);
+            MAQLWorker maql = new MAQLWorker(logger_);
             
-            result = mql.Init(args);
+            result = maql.Init(args);
 
             if (result == 0)
-                result = mql.FetchLicense();
+                result = maql.FetchLicense();
             
             Console.WriteLine("Press ENTER ...");
             Console.ReadLine();

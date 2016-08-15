@@ -407,12 +407,12 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         return null;
     }
 
-    public override void UpdateMACWithSerial(string colType, string mac, string serial)
+    public override bool UpdateMACWithSerial(string colType, string mac, string serial)
     {
         if (CheckExistingData(serial))
         {
             //TODO ???
-            return;
+            return false;
         }
 
         string sCmd = string.Format("UPDATE {0} SET Serialnumber='{1}' WHERE {2}='{3}'", tablename_, serial, colType, mac);
@@ -422,6 +422,8 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         sCmd = string.Format("SELECT Serialnumber FROM {0} WHERE Serialnumber='{1}' AND {2}='{3}'", tablename_, serial, colType, mac);
 
         Trace.WriteLine(ExecuteRead("Serialnumber", sCmd));
+
+        return true;
     }
 }
 }

@@ -92,7 +92,8 @@ namespace mv.MAQL
                     Trace.WriteLine("ERROR: Can't find requested MAC0 in database.");
                     return result;
                 }
-                result = StoreLicenseFile(ColType, db_MAC0);
+                if (sqldata_.UpdateMACWithSerial(ColType, db_MAC0.ToUpper(), Serial) == true)
+                    result = StoreLicenseFile(ColType, db_MAC0);
             }
             catch ( Exception ex )
             {

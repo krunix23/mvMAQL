@@ -20,7 +20,7 @@ public abstract class mvSQLDataHandlingBase
     public abstract void InsertSerial(string serial);
     public abstract string LoadLicensesFromFolder(string colType, string sFolder);
     public abstract byte[] RetrieveLicenseFile(string colType, string sMAC);
-    public abstract void UpdateMACWithSerial(string colType, string mac, string serial);
+    public abstract bool UpdateMACWithSerial(string colType, string mac, string serial);
 
     public static string MACInt64ToString(Int64 imac)
     {
