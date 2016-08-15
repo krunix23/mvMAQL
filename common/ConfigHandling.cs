@@ -137,5 +137,22 @@ public class ConfigHandling
         }
         return -1;
     }
+
+    public string LicenseStoreDir()
+    {
+        string result = string.Empty;
+        XmlNodeList elemList = cfgdoc_.GetElementsByTagName("license");
+
+        for (int i = 0; i < elemList.Count; i++)
+        {
+            if (elemList[i].Attributes.Count > 0)
+            {
+                if (elemList[i].Attributes["storedir"] != null)
+                    result = elemList[i].Attributes["storedir"].Value;
+            }
+            
+        }
+        return result;
+    }
 }
 }
