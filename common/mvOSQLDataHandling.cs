@@ -394,9 +394,8 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
                 retval = reader.GetBytes(0, startIndex, outByte, 0, maxBufferSize);
                 string result = System.Text.Encoding.UTF8.GetString(outByte, 0, (int)retval);
                 byte[] license = Convert.FromBase64String(result);
-                string outFile = Directory.GetCurrentDirectory() + "\\license_out.dat";
-                File.WriteAllBytes(outFile, license);
-                Trace.WriteLine(string.Format("Saving license as {0}", outFile));
+                sqlcon_.Close();
+                return license;
             }
         }
         catch (SystemException ex)
