@@ -14,16 +14,27 @@ namespace mv.MAQL
         static int Main(string[] args)
         {
             Console.WriteLine(string.Format("mvMAQLClient-no-gui"));
+            Int32 result = -1;
+
+            if(args.Length == 0)
+            {
+                Console.WriteLine("This program must be called with params.");
+                return -1;
+            }
 
             logger_ = new Logger("mvMAQLClient.log", "mvMAQLClient");
             Trace.Listeners.Add(logger_);
             MAQLWorker mql = new MAQLWorker(logger_);
-            mql.DummyFunction();
+            
+            result = mql.Init(args);
 
+            if (result == 0)
+                result = mql.FetchLicense();
+            
             Console.WriteLine("Press ENTER ...");
             Console.ReadLine();
 
-            return 0;
+            return result;
         }
     }
 }
