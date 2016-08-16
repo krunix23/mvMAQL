@@ -19,6 +19,7 @@ namespace mv.MAQL
         private string Serial = string.Empty;
         private bool NeedsNewLicense = false;
         private string LicenseStoreDir = string.Empty;
+        private bool LinuxOS = false;
 
         public MAQLWorker( TextWriterTraceListener logger)
         {
@@ -26,6 +27,9 @@ namespace mv.MAQL
             cfg_ = new ConfigHandling();
             sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
             LicenseStoreDir = cfg_.LicenseStoreDir();
+
+            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
+                LinuxOS = true;
         }
 
         public Int32 Init(string[] args)
@@ -68,6 +72,10 @@ namespace mv.MAQL
                 Trace.WriteLine("E2PROM seems to be valid. Will try to find appropriate license file.");
                 LicenseStoreDir += "\\old";
             }
+
+            if(LinuxOS)
+                LicenseStoreDir = LicenseStoreDir.Replace(@"\", "/");
+
             return 0;
         }
 
@@ -144,6 +152,10 @@ namespace mv.MAQL
                 byte[] license = sqldata_.RetrieveLicenseFile(col, mac);
                 mac.ToLower().Replace(":", "");
                 string outFile = LicenseStoreDir + "\\license_" + mac.ToLower().Replace(":", "") + ".dat";
+
+                if(LinuxOS)
+                    outFile = outFile.Replace(@"\", "/");
+                
                 File.WriteAllBytes(outFile, license);
                 Trace.WriteLine(string.Format("Saving license as {0}", outFile));
                 result = 0;
