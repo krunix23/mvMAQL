@@ -340,14 +340,14 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
             return;
         }
 
-        if (!CheckExistingData(sMAC))
+        if (!CheckExistingData(sMAC.ToUpper()))
         {
-            Trace.WriteLine(string.Format("The data \"{0}\" couldn't be found in the table", sMAC), "ERROR");
+            Trace.WriteLine(string.Format("The data \"{0}\" couldn't be found in the table", sMAC.ToUpper()), "ERROR");
             return;
         }
         byte[] fileBuf = File.ReadAllBytes(fileName);
         string license64 = Convert.ToBase64String(fileBuf);
-        string sCmd = string.Format("UPDATE {0} SET License=CONVERT('{1}',BINARY) WHERE {2}='{3}'", tablename_, license64, colType, sMAC);
+        string sCmd = string.Format("UPDATE {0} SET License=CONVERT('{1}',BINARY) WHERE {2}='{3}'", tablename_, license64, colType, sMAC.ToUpper());
 
         ExecuteNonQuery(sCmd);
         //RetrieveLicenseFile(colType, sMAC);
