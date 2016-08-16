@@ -78,13 +78,14 @@ namespace mv.MAQL
 
             try
             {
-                if (NeedsNewLicense == false)
+                if (NeedsNewLicense == true)
                 {
-                    db_MAC0 = sqldata_.FindMAC(ColType, MAC0.ToUpper());
+                    
+                    db_MAC0 = sqldata_.FindUnusedMAC(ColType);
                 }
                 else
                 {
-                    db_MAC0 = sqldata_.FindUnusedMAC(ColType);
+                    db_MAC0 = sqldata_.FindMAC(ColType, MAC0.ToUpper());
                 }
 
                 if (string.IsNullOrEmpty(db_MAC0))
@@ -92,8 +93,15 @@ namespace mv.MAQL
                     Trace.WriteLine("ERROR: Can't find requested MAC0 in database.");
                     return result;
                 }
+
                 if (sqldata_.UpdateMACWithSerial(ColType, db_MAC0.ToUpper(), Serial) == true)
+                {
                     result = StoreLicenseFile(ColType, db_MAC0);
+                }
+                else
+                {
+                    Trace.WriteLine(string.Format("ERROR: Did not fetch license file from db. Serialnumber already assigned to another MAC"));
+                }
             }
             catch ( Exception ex )
             {

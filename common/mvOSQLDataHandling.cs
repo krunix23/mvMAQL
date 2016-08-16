@@ -29,6 +29,12 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         }
     }
 
+    //private bool OpenLockConnection(MySqlCommand sqlcmd)
+    //{
+    //    sqlcmd = new MySqlCommand(sCmd, sqlcon_);
+    //    sqlcon_.Open();
+    //}
+
     /// <summary>
     /// Check existing data in SQL table.
     /// </summary>
@@ -230,7 +236,7 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
 
     public override string FindMAC(string colType, string mac)
     {
-        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac);
+        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac.ToUpper());
         string sResult = ExecuteRead(colType, sCmd);
 
         if (sResult != string.Empty)
@@ -239,14 +245,14 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         }
         else
         {
-            Trace.WriteLine(string.Format("Found no entry in table for {0}", mac), "ERROR");
+            Trace.WriteLine(string.Format("Found no entry in table for {0}", mac.ToUpper()), "ERROR");
         }
         return sResult;
     }
 
     public override void FindMACs(string colType, string mac)
     {
-        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac);
+        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac.ToUpper());
         List<string> lResult = ExecuteReads(colType, sCmd);
 
         if (lResult.Count > 0)
@@ -258,7 +264,7 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         }
         else
         {
-            Trace.WriteLine(string.Format("Found no entry in table for {0}", mac), "ERROR");
+            Trace.WriteLine(string.Format("Found no entry in table for {0}", mac.ToUpper()), "ERROR");
         }
     }
 
@@ -326,10 +332,10 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
 
     public override void InsertMAC(string colType, string mac)
     {
-        if (CheckExistingData(mac))
+        if (CheckExistingData(mac.ToUpper()))
             return;
 
-        ExecuteNonQuery(InsertMACCmd(colType, mac));
+        ExecuteNonQuery(InsertMACCmd(colType, mac.ToUpper()));
     }
 
     private string InsertMACCmd(string colType, string mac)
@@ -409,21 +415,23 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
 
     public override bool UpdateMACWithSerial(string colType, string mac, string serial)
     {
-        if (CheckExistingData(serial))
+        if (CheckExistingData(serial) == false)
+        {
+            string sCmd = string.Format("UPDATE {0} SET Serialnumber='{1}' WHERE {2}='{3}'", tablename_, serial, colType, mac);
+
+            ExecuteNonQuery(sCmd);
+
+            sCmd = string.Format("SELECT Serialnumber FROM {0} WHERE Serialnumber='{1}' AND {2}='{3}'", tablename_, serial, colType, mac);
+
+            Trace.WriteLine(ExecuteRead("Serialnumber", sCmd));
+
+            return true;
+        }
+        else
         {
             //TODO ???
             return false;
         }
-
-        string sCmd = string.Format("UPDATE {0} SET Serialnumber='{1}' WHERE {2}='{3}'", tablename_, serial, colType, mac);
-
-        ExecuteNonQuery(sCmd);
-
-        sCmd = string.Format("SELECT Serialnumber FROM {0} WHERE Serialnumber='{1}' AND {2}='{3}'", tablename_, serial, colType, mac);
-
-        Trace.WriteLine(ExecuteRead("Serialnumber", sCmd));
-
-        return true;
     }
 }
 }

@@ -81,7 +81,7 @@ public partial class Form1 : Form
 
     private void buttonSearchMAC_Click(object sender, EventArgs e)
     {
-        sqldata_.FindData(textBoxSearchMAC.Text, comboBoxType.Text);
+        sqldata_.FindData(textBoxSearchMAC.Text.ToUpper(), comboBoxType.Text);
     }
 
     private void buttonAssignSerialMACFree_Click(object sender, EventArgs e)
