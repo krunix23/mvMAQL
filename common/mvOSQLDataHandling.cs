@@ -76,7 +76,7 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
                     for(int i = 0; i < reader.FieldCount; i++)
                     {
                         if(reader.GetDataTypeName(i).Equals("VARCHAR"))
-                            tmp += reader[i].ToString() + " : ";
+                            tmp += reader[i].ToString() + " - ";
                     }
                 }
                 Trace.WriteLine(String.Format("Found in table: {0}", tmp));
@@ -266,6 +266,29 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         {
             Trace.WriteLine(string.Format("Found no entry in table for {0}", mac.ToUpper()), "ERROR");
         }
+    }
+
+    public override string FindMACBySerial(string coltype, string serial)
+    {
+        string result = string.Empty;
+
+        string sCmd = string.Format("SELECT {0} FROM {1} WHERE Serialnumber='{2}'", coltype, tablename_, serial);
+        List<string> lResult = ExecuteReads(coltype, sCmd);
+
+        if (lResult.Count > 0)
+        {
+            for (int i = 0; i < lResult.Count; i++)
+            {
+                Trace.WriteLine(string.Format("Found MAC in table: {0}", lResult[i]));
+                result = lResult[i];
+            }
+        }
+        else
+        {
+            Trace.WriteLine(string.Format("Found no entry in table for {0}", serial), "ERROR");
+        }
+
+        return result;
     }
 
     public override string FindSerial(string serial)

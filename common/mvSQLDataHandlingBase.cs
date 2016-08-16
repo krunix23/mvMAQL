@@ -12,6 +12,7 @@ public abstract class mvSQLDataHandlingBase
     public abstract Int64 FindHighestMAC(string colType);
     public abstract string FindMAC(string colType, string mac);
     public abstract void FindMACs(string colType, string mac);
+    public abstract string FindMACBySerial(string coltype, string serial);
     public abstract string FindSerial(string serial);
     public abstract void FindSerials(string serial);
     public abstract string FindUnusedMAC(string colType);

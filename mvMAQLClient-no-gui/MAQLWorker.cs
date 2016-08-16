@@ -100,7 +100,15 @@ namespace mv.MAQL
                 }
                 else
                 {
-                    Trace.WriteLine(string.Format("ERROR: Did not fetch license file from db. Serialnumber already assigned to another MAC"));
+                    if (sqldata_.FindMACBySerial(ColType, Serial) == MAC0.ToUpper())
+                    {
+                        Trace.WriteLine(string.Format("{0} is already assinged to {1}", Serial, MAC0));
+                        result = StoreLicenseFile(ColType, db_MAC0);
+                    }
+                    else
+                    {
+                        Trace.WriteLine(string.Format("ERROR: Did not fetch license file from db. Serialnumber already assigned to another MAC"));
+                    }
                 }
             }
             catch ( Exception ex )
@@ -117,6 +125,22 @@ namespace mv.MAQL
 
             try
             {
+                string[] fileList;
+
+                if(NeedsNewLicense)
+                {
+                    fileList = Directory.GetFiles(LicenseStoreDir, "*.dat");
+                }
+                else
+                {
+                    fileList = Directory.GetFiles(Directory.GetParent(LicenseStoreDir).FullName, "*.dat");
+                }
+
+                foreach (string f in fileList)
+                {
+                    File.Delete(f);
+                }
+
                 byte[] license = sqldata_.RetrieveLicenseFile(col, mac);
                 mac.ToLower().Replace(":", "");
                 string outFile = LicenseStoreDir + "\\license_" + mac.ToLower().Replace(":", "") + ".dat";

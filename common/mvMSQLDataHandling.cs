@@ -234,6 +234,13 @@ public class mvMSQLDataHandling : mvSQLDataHandlingBase
         }
     }
 
+    public override string FindMACBySerial(string coltype, string serial)
+    {
+        string result = string.Empty;
+
+        throw new Exception("not implemented yet");
+    }
+
     public override string FindSerial(string serial)
     {
         string sCmd = string.Format("SELECT Serialnumber From [{0}] WHERE Serialnumber='{1}'", tablename_, serial);
