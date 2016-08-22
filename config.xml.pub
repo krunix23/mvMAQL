@@ -3,8 +3,9 @@
   <!--<database provider="microsoft" name="ses" tablename="macs" connstr="Server=192.168.0.15,1433;Initial Catalog=gemini;User Id=ses;Password=***;"></database>-->
   <!--<database provider="oracle" name="ses" tablename="macs" connstr="server=192.168.0.22;database=ses;uid=ses;pwd=***;"></database>-->
   <database provider="oracle" name="ses" tablename="macs" connstr="server=mysql.intern.matrix-vision.de;database=gemini;uid=gemini_write;pwd=***;"></database>
-  <license storedir="C:\Users\Krunix\halcon"/>
-  <camera type="mvBlueGEMINI" mac="00:0c:8d:81:00:00" step="1" category="A"/>
-  <camera type="BlfCam_Profinet" mac="00:19:31:20:40:00" step="5" category="B"/>
-  <camera type="BlfCam_TCP" mac="00:19:31:20:40:00" step="1" category="B"/>
+  <license storedir="C:\Users\matrix\halcon"/>
+  <!--<license storedir="/opt/gemini/halcon"/>-->
+  <camera type="mvBlueGEMINI" mac="00:0c:8d:81:00:00" step="1"/>
+  <camera type="BlfCam_Profinet" mac="00:19:31:20:40:00" step="5"/>
+  <camera type="BlfCam_TCP" mac="00:19:31:20:40:00" step="1"/>
 </body>
