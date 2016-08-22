@@ -22,6 +22,7 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         try
         {
             sqlcon_ = new MySqlConnection(connstr_);
+            LockTable();
         }
         catch (SystemException ex)
         {
@@ -29,11 +30,22 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         }
     }
 
-    //private bool OpenLockConnection(MySqlCommand sqlcmd)
-    //{
-    //    sqlcmd = new MySqlCommand(sCmd, sqlcon_);
-    //    sqlcon_.Open();
-    //}
+    ~mvOSQLDataHandling()
+    {
+        UnlockTable();
+    }
+
+    private void LockTable()
+    {
+        string cmd = string.Format("LOCK TABLES {0} WRITE", tablename_);
+        ExecuteNonQuery(cmd);
+    }
+
+    private void UnlockTable()
+    {
+        string cmd = string.Format("UNLOCK TABLES");
+        ExecuteNonQuery(cmd);
+    }
 
     /// <summary>
     /// Check existing data in SQL table.
