@@ -3,6 +3,7 @@ bin
 mvMAQLClient/obj
 mvMAQLClient-no-gui/obj
 license*.dat
-mvMAQLClient/mvMAQLClient.csproj.user
+mvMAQLClient/*.csproj.user
 mvMAQLClient/config.xml
 mvMAQLClient-no-gui/config.xml
+mvMAQLClient-no-gui/*.csproj.user
