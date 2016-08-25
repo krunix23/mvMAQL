@@ -143,7 +143,7 @@ partial class Form1
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(362, 407);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "MACs";
+            this.tabPage2.Text = "License";
             // 
             // groupBox9
             // 
@@ -547,7 +547,7 @@ partial class Form1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 61);
+            this.tabControl1.Location = new System.Drawing.Point(12, 65);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(370, 433);
@@ -577,7 +577,7 @@ partial class Form1
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "mvMAQL";
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.tabPage2.ResumeLayout(false);
