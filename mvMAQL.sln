@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvMAQLClient", "mvMAQLClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvMAQLClient-no-gui", "mvMAQLClient-no-gui\mvMAQLClient-no-gui.csproj", "{487A9CAB-3DD3-4946-893A-1FADD05483A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvMAQLUnitTest", "mvMAQLUnitTest\mvMAQLUnitTest.csproj", "{07ED6D00-AE3C-418F-92C4-0E6EEEFF5997}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{487A9CAB-3DD3-4946-893A-1FADD05483A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487A9CAB-3DD3-4946-893A-1FADD05483A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487A9CAB-3DD3-4946-893A-1FADD05483A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07ED6D00-AE3C-418F-92C4-0E6EEEFF5997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07ED6D00-AE3C-418F-92C4-0E6EEEFF5997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07ED6D00-AE3C-418F-92C4-0E6EEEFF5997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07ED6D00-AE3C-418F-92C4-0E6EEEFF5997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

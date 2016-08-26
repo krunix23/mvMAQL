@@ -7,3 +7,4 @@ mvMAQLClient/*.csproj.user
 mvMAQLClient/config.xml
 mvMAQLClient-no-gui/config.xml
 mvMAQLClient-no-gui/*.csproj.user
+mvMAQLUnitTest/obj
