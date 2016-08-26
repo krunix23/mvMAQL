@@ -150,7 +150,6 @@ namespace mv.MAQL
                 }
 
                 byte[] license = sqldata_.RetrieveLicenseFile(col, mac);
-                mac.ToLower().Replace(":", "");
                 string outFile = LicenseStoreDir + "\\license_" + mac.ToLower().Replace(":", "") + ".dat";
 
                 if(LinuxOS)
