@@ -32,6 +32,12 @@ namespace mv.MAQL
                 LinuxOS = true;
         }
 
+        ~MAQLWorker()
+        {
+            sqldata_.Dispose();
+            sqldata_ = null;
+        }
+
         public Int32 Init(string[] args)
         {
             Int32 result = -1;

@@ -8,3 +8,4 @@ mvMAQLClient/config.xml
 mvMAQLClient-no-gui/config.xml
 mvMAQLClient-no-gui/*.csproj.user
 mvMAQLUnitTest/obj
+mvMAQLUnitTest/config.xml

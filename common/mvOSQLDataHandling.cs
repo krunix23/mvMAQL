@@ -30,8 +30,9 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         }
     }
 
-    ~mvOSQLDataHandling()
+    public override void Dispose()
     {
+        sqlcon_.Close();
         UnlockTable();
     }
 
@@ -94,13 +95,13 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
                 Trace.WriteLine(String.Format("Found in table: {0}", tmp));
                 result = true;
             }
-            sqlcon_.Close();
         }
         catch (SystemException ex)
         {
             Trace.WriteLine(string.Format("{0}(): {1}", System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message), "ERROR");
         }
 
+        sqlcon_.Close();
         return result;
     }
 
@@ -141,7 +142,8 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
             MySqlCommand sqlcmd = new MySqlCommand(cmd, sqlcon_);
             sqlcon_.Open();
             int ret = sqlcmd.ExecuteNonQuery();
-            result = true;
+            if (ret > 0)
+                result = true;
         }
         catch (SystemException ex)
         {
@@ -344,33 +346,41 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         return ExecuteRead(colType, sCmd);
     }
 
-    public override void InsertLicenseFile(string colType, string sMAC, string fileName)
+    public override bool InsertLicenseFile(string colType, string sMAC, string fileName)
     {
-        if(string.IsNullOrEmpty(fileName))
+        bool result = false;
+
+        if (string.IsNullOrEmpty(fileName) || (File.Exists(fileName) == false))
         {
             Trace.WriteLine(string.Format("The license file could not be located."), "ERROR");
-            return;
+            return result;
         }
 
         if (!CheckExistingData(sMAC.ToUpper()))
         {
             Trace.WriteLine(string.Format("The data \"{0}\" couldn't be found in the table", sMAC.ToUpper()), "ERROR");
-            return;
+            return result;
         }
+
         byte[] fileBuf = File.ReadAllBytes(fileName);
         string license64 = Convert.ToBase64String(fileBuf);
         string sCmd = string.Format("UPDATE {0} SET License=CONVERT('{1}',BINARY) WHERE {2}='{3}'", tablename_, license64, colType, sMAC.ToUpper());
 
-        ExecuteNonQuery(sCmd);
+        result = ExecuteNonQuery(sCmd);
         //RetrieveLicenseFile(colType, sMAC);
+        return result;
     }
 
-    public override void InsertMAC(string colType, string mac)
+    public override bool InsertMAC(string colType, string mac)
     {
-        if (CheckExistingData(mac.ToUpper()))
-            return;
+        bool result = false;
 
-        ExecuteNonQuery(InsertMACCmd(colType, mac.ToUpper()));
+        if (CheckExistingData(mac.ToUpper()))
+            return result;
+
+        result = ExecuteNonQuery(InsertMACCmd(colType, mac.ToUpper()));
+
+        return result;
     }
 
     private string InsertMACCmd(string colType, string mac)

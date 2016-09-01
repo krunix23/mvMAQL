@@ -29,6 +29,11 @@ public class mvMSQLDataHandling : mvSQLDataHandlingBase
         }
     }
 
+    public override void Dispose()
+    {
+        sqlcon_.Close();
+    }
+
     /// <summary>
     /// Check existing data in SQL table.
     /// </summary>
@@ -282,27 +287,34 @@ public class mvMSQLDataHandling : mvSQLDataHandlingBase
         return ExecuteRead(colType, sCmd);
     }
 
-    public override void InsertLicenseFile(string colType, string sMAC, string fileName)
+    public override bool InsertLicenseFile(string colType, string sMAC, string fileName)
     {
+        bool result = false;
+
         if (!CheckExistingData(sMAC))
         {
             Trace.WriteLine(string.Format("The data \"{0}\" couldn't be found in the table", sMAC), "ERROR");
-            return;
+            return result;
         }
         byte[] fileBuf = File.ReadAllBytes(fileName);
         string license64 = Convert.ToBase64String(fileBuf);
         string sCmd = string.Format("UPDATE [{0}] SET License=CONVERT(VARBINARY(MAX),'{1}') WHERE {2}='{3}'", tablename_, license64, colType, sMAC);
 
-        ExecuteNonQuery(sCmd);
-        RetrieveLicenseFile(colType, sMAC);
+        result = ExecuteNonQuery(sCmd);
+        //RetrieveLicenseFile(colType, sMAC);
+        return result;
     }
 
-    public override void InsertMAC(string colType, string mac)
+    public override bool InsertMAC(string colType, string mac)
     {
-        if (CheckExistingData(mac))
-            return;
+        bool result = false;
 
-        ExecuteNonQuery(InsertMACCmd(colType, mac));
+        if (CheckExistingData(mac))
+            return result;
+
+        result = ExecuteNonQuery(InsertMACCmd(colType, mac));
+
+        return result;
     }
 
     private string InsertMACCmd(string colType, string mac)
