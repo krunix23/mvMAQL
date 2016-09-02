@@ -148,5 +148,14 @@ namespace mvMAQLUnitTest
                 Assert.IsFalse(string.IsNullOrEmpty(sqldata_.FindUnusedMAC(type)));
             }
         }
+
+        [TestMethod]
+        public void test_MAQLHandlingDisposeSerialnumber()
+        {
+            Assert.IsFalse(sqldata_.DisposeSerialnumber(null));
+            Assert.IsFalse(sqldata_.DisposeSerialnumber(""));
+            Assert.IsFalse(sqldata_.DisposeSerialnumber("RESERVED"));
+            Assert.IsFalse(sqldata_.DisposeSerialnumber("deadaffe"));
+        }
     }
 }
