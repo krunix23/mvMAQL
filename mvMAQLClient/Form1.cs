@@ -34,9 +34,9 @@ public partial class Form1 : Form
 
         if (cfg_.DatabaseProvider() != string.Empty)
         {
-            if (cfg_.DatabaseProvider() == "microsoft")
+            /*if (cfg_.DatabaseProvider() == "microsoft")
                 sqldata_ = new mvMSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
-            else if (cfg_.DatabaseProvider() == "oracle")
+            else*/ if (cfg_.DatabaseProvider() == "oracle")
                 sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
             else
                 throw new SystemException("No database provider found in config.xml");

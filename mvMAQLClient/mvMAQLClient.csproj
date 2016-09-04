@@ -80,9 +80,6 @@
     <Compile Include="..\common\ConfigHandling.cs">
       <Link>ConfigHandling.cs</Link>
     </Compile>
-    <Compile Include="..\common\mvMSQLDataHandling.cs">
-      <Link>mvMSQLDataHandling.cs</Link>
-    </Compile>
     <Compile Include="..\common\mvOSQLDataHandling.cs">
       <Link>mvOSQLDataHandling.cs</Link>
     </Compile>
@@ -146,14 +143,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="mv.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(ProjectDir)\config.xml $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>copy $(SolutionDir)\config.xml $(TargetDir)\config.xml</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
