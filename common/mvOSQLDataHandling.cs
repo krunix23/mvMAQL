@@ -36,6 +36,29 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         UnlockTable();
     }
 
+    public override bool DisposeSerialnumber(string serial)
+    {
+        bool result = false;
+
+        if ((serial == "RESERVED") || (string.IsNullOrEmpty(serial)))
+        {
+            Trace.WriteLine(string.Format("Deleting Serialnumber \"{0}\" is not allowed", serial), "ERROR");
+            return result;
+        }
+
+        if (string.IsNullOrEmpty(FindSerial(serial)) == false)
+        {
+            string cmd = string.Format("UPDATE {0} SET Serialnumber = NULL WHERE Serialnumber='{1}'", tablename_, serial);
+            result = ExecuteNonQuery(cmd);
+        }
+        else
+        {
+            Trace.WriteLine(string.Format("Serialnumber {0} to be de deleted can't be found in table", serial), "ERROR");
+        }
+
+        return result;
+    }
+
     private void LockTable()
     {
         string cmd = string.Format("LOCK TABLES {0} WRITE", tablename_);

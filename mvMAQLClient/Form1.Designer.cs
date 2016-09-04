@@ -78,6 +78,10 @@ partial class Form1
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxDeleteSerial = new System.Windows.Forms.TextBox();
+            this.buttonDeleteSerial = new System.Windows.Forms.Button();
             this.groupBox5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -91,6 +95,7 @@ partial class Form1
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -331,6 +336,7 @@ partial class Form1
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Controls.Add(this.groupBox10);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -563,6 +569,44 @@ partial class Form1
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.buttonDeleteSerial);
+            this.groupBox10.Controls.Add(this.textBoxDeleteSerial);
+            this.groupBox10.Controls.Add(this.label12);
+            this.groupBox10.Location = new System.Drawing.Point(6, 333);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(350, 68);
+            this.groupBox10.TabIndex = 14;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Delete";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(16, 20);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(68, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Serialnumber";
+            // 
+            // textBoxDeleteSerial
+            // 
+            this.textBoxDeleteSerial.Location = new System.Drawing.Point(101, 20);
+            this.textBoxDeleteSerial.Name = "textBoxDeleteSerial";
+            this.textBoxDeleteSerial.Size = new System.Drawing.Size(136, 20);
+            this.textBoxDeleteSerial.TabIndex = 1;
+            // 
+            // buttonDeleteSerial
+            // 
+            this.buttonDeleteSerial.Location = new System.Drawing.Point(258, 20);
+            this.buttonDeleteSerial.Name = "buttonDeleteSerial";
+            this.buttonDeleteSerial.Size = new System.Drawing.Size(86, 23);
+            this.buttonDeleteSerial.TabIndex = 2;
+            this.buttonDeleteSerial.Text = "Delete";
+            this.buttonDeleteSerial.UseVisualStyleBackColor = true;
+            this.buttonDeleteSerial.Click += new System.EventHandler(this.buttonDeleteSerial_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -599,6 +643,8 @@ partial class Form1
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
     }
@@ -654,6 +700,10 @@ partial class Form1
     private System.Windows.Forms.Button buttonLoadDir;
     private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     private System.Windows.Forms.Button buttonOpenDir;
+    private System.Windows.Forms.GroupBox groupBox10;
+    private System.Windows.Forms.Label label12;
+    private System.Windows.Forms.Button buttonDeleteSerial;
+    private System.Windows.Forms.TextBox textBoxDeleteSerial;
 }
 }
 

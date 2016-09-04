@@ -242,5 +242,10 @@ public partial class Form1 : Form
         //    tabTextArea);
         //}
     }
+
+    private void buttonDeleteSerial_Click(object sender, EventArgs e)
+    {
+        sqldata_.DisposeSerialnumber(textBoxDeleteSerial.Text);
+    }
 }
 }
