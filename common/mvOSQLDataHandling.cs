@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using MySql.Data.MySqlClient;
+using System.Globalization;
 
 namespace mv.MAQL
 {
@@ -492,22 +493,27 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
 
     public override bool UpdateMACWithSerial(string colType, string mac, string serial)
     {
+        bool result = false;
         if (CheckExistingData(serial) == false)
         {
             string sCmd = string.Format("UPDATE {0} SET Serialnumber='{1}' WHERE {2}='{3}'", tablename_, serial, colType, mac);
+            result = ExecuteNonQuery(sCmd);
 
+            DateTime localDate = DateTime.Now;
+            var culture = new CultureInfo("de-DE");
+            sCmd = string.Format("UPDATE {0} SET Date='{1}' WHERE Serialnumber='{2}' AND {3}='{4}'", tablename_, localDate.ToString(culture), serial, colType, mac);
             ExecuteNonQuery(sCmd);
 
             sCmd = string.Format("SELECT Serialnumber FROM {0} WHERE Serialnumber='{1}' AND {2}='{3}'", tablename_, serial, colType, mac);
 
             Trace.WriteLine(ExecuteRead("Serialnumber", sCmd));
 
-            return true;
+            return result;
         }
         else
         {
             //TODO ???
-            return false;
+            return result;
         }
     }
 }
