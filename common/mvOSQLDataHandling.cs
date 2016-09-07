@@ -36,6 +36,15 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         UnlockTable();
     }
 
+    public override bool DisposeLicense(string col, string mac)
+    {
+        bool result = false;
+        string cmd = string.Format("DELETE FROM {0} WHERE License IS NOT NULL AND {1}='{2}'", tablename_, col, mac);
+
+        result = ExecuteNonQuery(cmd);
+        return result;
+    }
+
     public override bool DisposeSerialnumber(string serial)
     {
         bool result = false;

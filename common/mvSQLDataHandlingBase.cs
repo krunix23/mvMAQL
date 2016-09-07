@@ -9,6 +9,7 @@ namespace mv.MAQL
 public abstract class mvSQLDataHandlingBase
 {
     public abstract void Dispose();
+    public abstract bool DisposeLicense(string col, string mac);
     public abstract bool DisposeSerialnumber(string serial);
     public abstract void FindData(string data, string column);
     public abstract Int64 FindHighestMAC(string colType);
