@@ -239,5 +239,12 @@ namespace mvMAQLUnitTest
             
             Assert.IsTrue(sqldata_.DisposeLicense(knownType, randMACStr));
         }
+
+        [TestMethod]
+        public void test_14MAQLHandlingUpdateDateTime()
+        {
+            Assert.IsTrue(sqldata_.UpdateDateTime(knownType, knownMAC, knownSerial));
+            Assert.IsTrue(sqldata_.UpdateDateTime(knownType, knownMAC));
+        }
     }
 }

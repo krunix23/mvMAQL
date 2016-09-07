@@ -281,9 +281,9 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         return result;
     }
 
-    public override string FindMAC(string colType, string mac)
+    public override string FindMAC(string colType, string sMAC)
     {
-        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac.ToUpper());
+        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, sMAC.ToUpper());
         string sResult = ExecuteRead(colType, sCmd);
 
         if (sResult != string.Empty)
@@ -292,14 +292,14 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         }
         else
         {
-            Trace.WriteLine(string.Format("Found no entry in table for {0}", mac.ToUpper()), "ERROR");
+            Trace.WriteLine(string.Format("Found no entry in table for {0}", sMAC.ToUpper()), "ERROR");
         }
         return sResult;
     }
 
-    public override void FindMACs(string colType, string mac)
+    public override void FindMACs(string colType, string sMAC)
     {
-        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, mac.ToUpper());
+        string sCmd = string.Format("SELECT {0} FROM {1} WHERE {2}='{3}'", colType, tablename_, colType, sMAC.ToUpper());
         List<string> lResult = ExecuteReads(colType, sCmd);
 
         if (lResult.Count > 0)
@@ -311,7 +311,7 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         }
         else
         {
-            Trace.WriteLine(string.Format("Found no entry in table for {0}", mac.ToUpper()), "ERROR");
+            Trace.WriteLine(string.Format("Found no entry in table for {0}", sMAC.ToUpper()), "ERROR");
         }
     }
 
@@ -404,21 +404,21 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         return result;
     }
 
-    public override bool InsertMAC(string colType, string mac)
+    public override bool InsertMAC(string colType, string sMAC)
     {
         bool result = false;
 
-        if (CheckExistingData(mac.ToUpper()))
+        if (CheckExistingData(sMAC.ToUpper()))
             return result;
 
-        result = ExecuteNonQuery(InsertMACCmd(colType, mac.ToUpper()));
+        result = ExecuteNonQuery(InsertMACCmd(colType, sMAC.ToUpper()));
 
         return result;
     }
 
-    private string InsertMACCmd(string colType, string mac)
+    private string InsertMACCmd(string colType, string sMAC)
     {
-        return string.Format("INSERT INTO {0}({1}) values('{2}')", tablename_, colType, mac);
+        return string.Format("INSERT INTO {0}({1}) values('{2}')", tablename_, colType, sMAC);
     }
 
     public override void InsertSerial(string serial)
@@ -479,6 +479,7 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
                 string result = System.Text.Encoding.UTF8.GetString(outByte, 0, (int)retval);
                 byte[] license = Convert.FromBase64String(result);
                 sqlcon_.Close();
+                UpdateDateTime(colType, sMAC);
                 return license;
             }
         }
@@ -491,20 +492,37 @@ public class mvOSQLDataHandling : mvSQLDataHandlingBase
         return null;
     }
 
-    public override bool UpdateMACWithSerial(string colType, string mac, string serial)
+    public override bool UpdateDateTime(string colType, string sMAC)
+    {
+        bool result = false;
+        DateTime localDate = DateTime.Now;
+        var culture = new CultureInfo("de-DE");
+        string sCmd = string.Format("UPDATE {0} SET Date='{1}' WHERE {2}='{3}'", tablename_, localDate.ToString(culture), colType, sMAC);
+        result = ExecuteNonQuery(sCmd);
+        return result;
+    }
+
+    public override bool UpdateDateTime(string colType, string sMAC, string serial)
+    {
+        bool result = false;
+        DateTime localDate = DateTime.Now;
+        var culture = new CultureInfo("de-DE");
+        string sCmd = string.Format("UPDATE {0} SET Date='{1}' WHERE Serialnumber='{2}' AND {3}='{4}'", tablename_, localDate.ToString(culture), serial, colType, sMAC);
+        result = ExecuteNonQuery(sCmd);
+        return result;
+    }
+
+    public override bool UpdateMACWithSerial(string colType, string sMAC, string serial)
     {
         bool result = false;
         if (CheckExistingData(serial) == false)
         {
-            string sCmd = string.Format("UPDATE {0} SET Serialnumber='{1}' WHERE {2}='{3}'", tablename_, serial, colType, mac);
+            string sCmd = string.Format("UPDATE {0} SET Serialnumber='{1}' WHERE {2}='{3}'", tablename_, serial, colType, sMAC);
             result = ExecuteNonQuery(sCmd);
 
-            DateTime localDate = DateTime.Now;
-            var culture = new CultureInfo("de-DE");
-            sCmd = string.Format("UPDATE {0} SET Date='{1}' WHERE Serialnumber='{2}' AND {3}='{4}'", tablename_, localDate.ToString(culture), serial, colType, mac);
-            ExecuteNonQuery(sCmd);
+            UpdateDateTime(colType, sMAC, serial);
 
-            sCmd = string.Format("SELECT Serialnumber FROM {0} WHERE Serialnumber='{1}' AND {2}='{3}'", tablename_, serial, colType, mac);
+            sCmd = string.Format("SELECT Serialnumber FROM {0} WHERE Serialnumber='{1}' AND {2}='{3}'", tablename_, serial, colType, sMAC);
 
             Trace.WriteLine(ExecuteRead("Serialnumber", sCmd));
 

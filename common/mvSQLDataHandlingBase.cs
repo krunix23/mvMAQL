@@ -13,8 +13,8 @@ public abstract class mvSQLDataHandlingBase
     public abstract bool DisposeSerialnumber(string serial);
     public abstract void FindData(string data, string column);
     public abstract Int64 FindHighestMAC(string colType);
-    public abstract string FindMAC(string colType, string mac);
-    public abstract void FindMACs(string colType, string mac);
+    public abstract string FindMAC(string colType, string sMAC);
+    public abstract void FindMACs(string colType, string sMAC);
     public abstract string FindMACBySerial(string coltype, string serial);
     public abstract string FindSerial(string serial);
     public abstract void FindSerials(string serial);
@@ -24,7 +24,9 @@ public abstract class mvSQLDataHandlingBase
     public abstract void InsertSerial(string serial);
     public abstract string LoadLicensesFromFolder(string colType, string sFolder);
     public abstract byte[] RetrieveLicenseFile(string colType, string sMAC);
-    public abstract bool UpdateMACWithSerial(string colType, string mac, string serial);
+    public abstract bool UpdateDateTime(string colType, string sMAC);
+    public abstract bool UpdateDateTime(string colType, string sMAC, string serial);
+    public abstract bool UpdateMACWithSerial(string colType, string sMAC, string serial);
 
     public static string MACInt64ToString(Int64 imac)
     {
