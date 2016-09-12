@@ -15,7 +15,7 @@ namespace mvMAQLUnitTest
     public class UnitTest1
     {
         const string knownMAC = "00:0C:8D:00:0C:F1";
-        const string knownSerial = "MS000241";
+        const string knownSerial = "MS000001";
         const string knownType = "mvBlueGEMINI";
 
         private ConfigHandling cfg_ = null;
