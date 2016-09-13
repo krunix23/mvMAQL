@@ -34,12 +34,14 @@ public partial class Form1 : Form
 
         if (cfg_.DatabaseProvider() != string.Empty)
         {
-            /*if (cfg_.DatabaseProvider() == "microsoft")
-                sqldata_ = new mvMSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
-            else*/ if (cfg_.DatabaseProvider() == "oracle")
+            if (cfg_.DatabaseProvider() == "oracle")
                 sqldata_ = new mvOSQLDataHandling(cfg_.DatabaseName(), cfg_.ConnectionString());
             else
-                throw new SystemException("No database provider found in config.xml");
+                throw new SystemException("No valid database provider found in config.xml");
+        }
+        else
+        {
+            throw new SystemException("Couldn't determine database provider from config.xml");
         }
 
         string[] sTypes = cfg_.GetAllTypes();
@@ -48,8 +50,8 @@ public partial class Form1 : Form
             comboBoxType.Items.Add(sTypes[i]);
         }
         comboBoxType.SelectedIndex = 0;
-        textBoxInsertLicense.Text = "C:\\Users\\krunix\\halcon\\gemini\\old\\license_000c8d000cf1.dat";
-        textBoxMACLicenseFile.Text = "00:0c:8d:00:0c:f1";
+        textBoxInsertLicense.Text = @"C:\Users\matrix\halcon\mvBlueGEMINI\old\license_000c8d000cf1.dat";
+        textBoxMACLicenseFile.Text = "00:0C:8D:00:0C:F1";
     }
 
     private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,8 +66,7 @@ public partial class Form1 : Form
         Int64 lastMAC = sqldata_.FindHighestMAC(sType);
         if(lastMAC > 0)
         {
-            Int64 nxtMAC = lastMAC + cfg_.GetStepwidth(sType);
-            textBoxFirstMAC.Text = mvSQLDataHandlingBase.MACInt64ToString(nxtMAC);
+            textBoxFirstMAC.Text = mvSQLDataHandlingBase.MACInt64ToString(lastMAC);
         }
     }
 

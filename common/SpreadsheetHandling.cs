@@ -47,6 +47,7 @@ public class SpreadsheetHandling
                 Trace.WriteLine("The stepwidth for MAC creation is invalid", "ERROR");
             }
             slDoc.SetColumnWidth("A", 25.0);
+            slDoc.SetColumnWidth("B", 25.0);
             slDoc.SetCellValue("A1", type);
 
             sMacs[0] = mac1st;
@@ -59,6 +60,10 @@ public class SpreadsheetHandling
                 iMAC += iStepWidth;
                 sMacs[i] = MACInt64ToString(iMAC);
             }
+
+            string currDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+            Trace.WriteLine(string.Format("Generating {0} MAC's on {1}.", sMacs.Length, currDate), "INFO");
+            slDoc.SetCellValue("B1", currDate);
 
             for (int i = 0; i < sMacs.Length; i++)
             {

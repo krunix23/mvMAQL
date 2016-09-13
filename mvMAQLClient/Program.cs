@@ -29,8 +29,6 @@ static class Program
         {
             Console.WriteLine(ex.Message);
         }
-        //Application.Run();
-        //Console.WriteLine("main(): WP");
     }
 }
 }

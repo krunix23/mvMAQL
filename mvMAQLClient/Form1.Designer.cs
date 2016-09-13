@@ -54,6 +54,10 @@ partial class Form1
             this.numericUpDownNumMACs = new System.Windows.Forms.NumericUpDown();
             this.textBoxFirstMAC = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.buttonDeleteSerial = new System.Windows.Forms.Button();
+            this.textBoxDeleteSerial = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBoxAssignMAC = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -78,10 +82,6 @@ partial class Form1
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBoxDeleteSerial = new System.Windows.Forms.TextBox();
-            this.buttonDeleteSerial = new System.Windows.Forms.Button();
             this.groupBox5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -90,12 +90,12 @@ partial class Form1
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumMACs)).BeginInit();
             this.tabPage1.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -305,9 +305,9 @@ partial class Form1
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(7, 19);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.Size = new System.Drawing.Size(82, 13);
             this.label8.TabIndex = 3;
-            this.label8.Text = "1st MAC";
+            this.label8.Text = "Last MAC in DB";
             // 
             // buttonCreate
             // 
@@ -348,6 +348,44 @@ partial class Form1
             this.tabPage1.Size = new System.Drawing.Size(362, 407);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Database";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.buttonDeleteSerial);
+            this.groupBox10.Controls.Add(this.textBoxDeleteSerial);
+            this.groupBox10.Controls.Add(this.label12);
+            this.groupBox10.Location = new System.Drawing.Point(6, 333);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(350, 68);
+            this.groupBox10.TabIndex = 14;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Delete";
+            // 
+            // buttonDeleteSerial
+            // 
+            this.buttonDeleteSerial.Location = new System.Drawing.Point(258, 20);
+            this.buttonDeleteSerial.Name = "buttonDeleteSerial";
+            this.buttonDeleteSerial.Size = new System.Drawing.Size(86, 23);
+            this.buttonDeleteSerial.TabIndex = 2;
+            this.buttonDeleteSerial.Text = "Delete";
+            this.buttonDeleteSerial.UseVisualStyleBackColor = true;
+            this.buttonDeleteSerial.Click += new System.EventHandler(this.buttonDeleteSerial_Click);
+            // 
+            // textBoxDeleteSerial
+            // 
+            this.textBoxDeleteSerial.Location = new System.Drawing.Point(101, 20);
+            this.textBoxDeleteSerial.Name = "textBoxDeleteSerial";
+            this.textBoxDeleteSerial.Size = new System.Drawing.Size(136, 20);
+            this.textBoxDeleteSerial.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(16, 20);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(68, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Serialnumber";
             // 
             // groupBox4
             // 
@@ -569,44 +607,6 @@ partial class Form1
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.buttonDeleteSerial);
-            this.groupBox10.Controls.Add(this.textBoxDeleteSerial);
-            this.groupBox10.Controls.Add(this.label12);
-            this.groupBox10.Location = new System.Drawing.Point(6, 333);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(350, 68);
-            this.groupBox10.TabIndex = 14;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Delete";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 20);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(68, 13);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Serialnumber";
-            // 
-            // textBoxDeleteSerial
-            // 
-            this.textBoxDeleteSerial.Location = new System.Drawing.Point(101, 20);
-            this.textBoxDeleteSerial.Name = "textBoxDeleteSerial";
-            this.textBoxDeleteSerial.Size = new System.Drawing.Size(136, 20);
-            this.textBoxDeleteSerial.TabIndex = 1;
-            // 
-            // buttonDeleteSerial
-            // 
-            this.buttonDeleteSerial.Location = new System.Drawing.Point(258, 20);
-            this.buttonDeleteSerial.Name = "buttonDeleteSerial";
-            this.buttonDeleteSerial.Size = new System.Drawing.Size(86, 23);
-            this.buttonDeleteSerial.TabIndex = 2;
-            this.buttonDeleteSerial.Text = "Delete";
-            this.buttonDeleteSerial.UseVisualStyleBackColor = true;
-            this.buttonDeleteSerial.Click += new System.EventHandler(this.buttonDeleteSerial_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -634,6 +634,8 @@ partial class Form1
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumMACs)).EndInit();
             this.tabPage1.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -643,8 +645,6 @@ partial class Form1
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
     }
